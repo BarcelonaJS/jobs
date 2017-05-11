@@ -5,9 +5,13 @@
   <title>BarcelonaJS | Jobs</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.rawgit.com/showdownjs/showdown/1.6.4/dist/showdown.min.js"></script>
   <script src="vue.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
     crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -30,8 +34,8 @@
       <h1>BarcelonaJS Job Board</h1>
       <ul v-for="job in jobs">
         <li>
-          <h2>job.title</h2>
-          <p>job.body</p>
+          <h2>{{job.title}}</h2>
+          <div v-html="job.html"></div>
         </li>
       </ul>
     </div>
@@ -43,16 +47,24 @@
       data: {
         jobs: []
       },
-      ready: function () {
-        console.log('ready')
+      mounted: function () {
         this.getJobs()
       },
       methods: {
         getJobs: function () {
-          this.$http.get('https://api.github.com/repos/patrickheneise/jobs/issues?labels=jobs', function (jobs) {
-            console.log('hello')
-            this.$set('jobs', jobs)
-          })
+          var that = this
+          var converter = new showdown.Converter()
+          converter.setFlavor('github');
+
+          axios.get('https://api.github.com/repos/patrickheneise/jobs/issues?labels=jobs')
+            .then(function (res) {
+              var jobs = res.data.map(function (job) {
+                console.log(showdown.getDefaultOptions())
+                job.html = converter.makeHtml(job.body)
+                return job
+              })
+              that.jobs = jobs
+            })
         }
       }
     })
