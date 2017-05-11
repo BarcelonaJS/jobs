@@ -1,0 +1,14 @@
+---
+company: ACME SL
+salary: X-Yk annual
+stack: 
+  - node.js
+  - VueJS
+level: Junior/Senior/Godfather
+
+
+---
+
+The Job description
+
+[The ultimate style guide to writing job descriptions](https://get.workable.com/best-job-description-templates/)

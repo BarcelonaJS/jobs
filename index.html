@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BarcelonaJS | Jobs</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ul v-for="job in jobs">
+      <li>
+        <h2>job.title</h2>
+        <p>job.body</p>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        jobs: []
+      },
+      ready : function() {
+        this.getJobs()
+      },
+      methods: {
+        getJobs: function () {
+          this.$http.get('https://api.github.com/repos/barcelonajs/jobs/issues\?labels="jobs"', function(jobs) {
+            this.$set('jobs',jobs)
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

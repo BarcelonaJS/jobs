@@ -1,0 +1,12 @@
+{
+  "name": "@barcelonajs/jobs",
+  "description": "JavaScript Jobs in Barcelona",
+  "author": "Patrick Heneise <patrick@blended.io>, http://blended.io",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "dependencies": {
+    "http-server": "^0.10.0"
+  },
+  "devDependencies": {}
+}
