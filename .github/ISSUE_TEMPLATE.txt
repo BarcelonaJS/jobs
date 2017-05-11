@@ -4,7 +4,8 @@ salary: X-Yk annual
 stack: 
   - node.js
   - VueJS
-  
+level: Junior/Senior/Godfather
+
 
 ---
 
