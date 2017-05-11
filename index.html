@@ -6,6 +6,7 @@
 </head>
 <body>
   <div id="app">
+    <h1>BarcelonaJS Job Board</h1>
     <ul v-for="job in jobs">
       <li>
         <h2>job.title</h2>
@@ -25,7 +26,7 @@
       },
       methods: {
         getJobs: function () {
-          this.$http.get('https://api.github.com/repos/patrickheneise/jobs/issues\?labels="jobs"', function(jobs) {
+          this.$http.get('https://api.github.com/repos/patrickheneise/jobs/issues?labels=jobs', function(jobs) {
             this.$set('jobs',jobs)
           })
         }
