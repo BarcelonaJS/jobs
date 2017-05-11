@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>BarcelonaJS | Jobs</title>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/vue.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
+    crossorigin="anonymous">
 </head>
+
 <body>
-  <div id="app">
-    <h1>BarcelonaJS Job Board</h1>
-    <ul v-for="job in jobs">
-      <li>
-        <h2>job.title</h2>
-        <p>job.body</p>
-      </li>
-    </ul>
+  <div id="app" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+      <div class="header">
+        <h1 class="brand-title">A Job Board</h1>
+
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="pure-button" href="http://barcelonajs.org">BarcelonaJS</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+      <h1>BarcelonaJS Job Board</h1>
+      <ul v-for="job in jobs">
+        <li>
+          <h2>job.title</h2>
+          <p>job.body</p>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <script>
@@ -21,17 +43,20 @@
       data: {
         jobs: []
       },
-      ready : function() {
+      ready: function () {
+        console.log('ready')
         this.getJobs()
       },
       methods: {
         getJobs: function () {
-          this.$http.get('https://api.github.com/repos/patrickheneise/jobs/issues?labels=jobs', function(jobs) {
-            this.$set('jobs',jobs)
+          this.$http.get('https://api.github.com/repos/patrickheneise/jobs/issues?labels=jobs', function (jobs) {
+            console.log('hello')
+            this.$set('jobs', jobs)
           })
         }
       }
     })
   </script>
 </body>
+
 </html>
